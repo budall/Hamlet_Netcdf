@@ -37,6 +37,13 @@ teststr <-as.vector(strsplit(filestub, "_"))
 lat <- teststr[[1]][5]
 long <- teststr[[1]][6]
 
+if ((lat >32) || (lat <40)) {
+  break
+}
+if ((long < -111) || (long > -107)) {
+  break
+}
+
 netcdf_filename <- filestub
 
 xyz_file <- read.table(netcdf_filename)
