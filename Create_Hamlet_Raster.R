@@ -1,6 +1,6 @@
 
 rm(list = ls())
-
+  
 
 top_level <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
 
