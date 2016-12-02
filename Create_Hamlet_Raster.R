@@ -25,6 +25,14 @@ for (i in 1:length(dirs)) {
   
   # need to make the raster here...
   
+  # need to create bands based on dates
+  
+  # do we create 1 raster per month, or can we have an annual file with bot multiple dates and multiple fields?
+  
+  # might just need to do annual file for each variable..with 12 bands, one per month
+  # so hamlet_tmin_1915_1.nc
+  # etc...that is the PRISM model
+  
   library(raster)
   test <- rasterFromXYZ(mymergeddata)
   plot(test)
