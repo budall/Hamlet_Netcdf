@@ -21,13 +21,15 @@ file_list <- list.files(path="/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UC
 
 start<-Sys.time()
 
-for(i in 2:100 )  {
-  print(file_list[i])
+
+
+for(i in 2:length(file_list ))  {
+ # print(file_list[i])
   
   filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all/"
   file_next <- paste(filestub, file_list[i[]], sep="")
  print(file_next)
-
+print(i)
 
 #filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all/data_40.34375_-123.15625"
 filestub <- file_next
@@ -37,12 +39,12 @@ teststr <-as.vector(strsplit(filestub, "_"))
 lat <- teststr[[1]][5]
 long <- teststr[[1]][6]
 
-if ((lat >32) || (lat <40)) {
-  break
-}
-if ((long < -111) || (long > -107)) {
-  break
-}
+# if ((lat >32) || (lat <40)) {
+#   break
+# }
+# if ((long < -111) || (long > -107)) {
+#   break
+# }
 
 netcdf_filename <- filestub
 
@@ -85,7 +87,7 @@ all.xts <- xts(all_variables, order.by=as.Date(all_variables$dates_mon))
 # write out into separate year files
 
 startYr <- 1915
-endYr <- 2015
+endYr <- 1920
 for(yr in startYr:endYr) {
   
   stub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
