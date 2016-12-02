@@ -31,21 +31,22 @@ for (i in 1:length(dirs)) {
   
  # https://gis.stackexchange.com/questions/20018/how-can-i-convert-data-in-the-form-of-lat-lon-value-into-a-raster-file-using-r
   
-  # library(sp)
-  # library(rgdal)
-  # coordinates(pts)=~x+y
-  # proj4string(pts)=CRS("+init=epsg:4326") # set it to lat-long
-  # pts = spTransform(pts,CRS("insert your proj4 string here"))
-  # d. Tell R that this is gridded:
+   library(sp)
+   library(rgdal)
+   coordinates(pts)=~x+y
+   proj4string(pts)=CRS("+init=epsg:4326") # set it to lat-long
+   pts = spTransform(pts,CRS("insert your proj4 string here"))
+  
+   # d. Tell R that this is gridded:
   #   
-  #   gridded(pts) = TRUE
+     gridded(pts) = TRUE
   # At this point you'll get an error if your coordinates don't lie on a nice regular grid.
   # Now use the raster package to convert to a raster and set its CRS:
-  #   r = raster(pts)
-  # projection(r) = CRS("insert your proj4 string here")
+     r = raster(pts)
+   projection(r) = CRS("insert your proj4 string here")
   # Now have a look:
-  #   plot(r)
+     plot(r)
   # Now write it as a geoTIFF file using the raster package:
-  #   writeRaster(r,"pts.tif")
+     writeRaster(r,"pts.tif")
   
 }
