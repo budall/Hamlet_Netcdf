@@ -23,6 +23,11 @@ for (i in 1:length(dirs)) {
     do.call(rbind,
             lapply(all_files, read.csv))
   
+  
+  # might make more sense just to cat these files together, then read in all at once.
+  
+  
+  
   # need to make the raster here...
   
   # need to create bands based on dates
