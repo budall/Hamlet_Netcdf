@@ -1,4 +1,6 @@
 
+# read in one big file...
+
 rm(list = ls())
   
 
@@ -21,8 +23,9 @@ for (i in 1:length(dirs)) {
   
   all_files <- list.files()
   
-  
+  # better than below, just make one file using shell script? or Extract_Hamlet_Data
   # $awk 'FNR > 1 { print }' *.csv USE THIS to concatenate, not the lines below
+  # issue a system call to do a cat * to one file??
   
   mymergeddata <-
     do.call(rbind,
@@ -31,6 +34,27 @@ for (i in 1:length(dirs)) {
   mymergeddata <-
     do.call(rbind,
             lapply(dirs, read.csv))
+  
+  
+  
+  # at this point we have a big dataframe for the entire year, each row is a month for a given lat/long pair
+  # we are going to wirte out 4 files, each for one variable (), each for one complete year
+  # subset the data frame by variable and by month
+  # create a raster for that month
+  # stack the raster by month
+  # write out the entire 12 months...
+  
+  for (month in 1:12) {
+    month =1
+    new_data <- mymergeddata[mymergeddata$X==month, c(mymergeddata$lat, mymergeddata$long)]
+  }
+  
+  
+  
+  
+  
+  
+  
   
   # might make more sense just to cat these files together, then read in all at once.
   
