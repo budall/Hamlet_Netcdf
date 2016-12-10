@@ -16,22 +16,22 @@ rm(list = ls())
 setwd <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
 filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/"
 
-setwd <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all"
-file_list <- list.files(path="/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all")			#  first in list will be root (".")
+setwd <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw"
+file_list <- list.files(path="/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw")			#  first in list will be root (".")
 
 start<-Sys.time()
 
 
 
-for(i in 2:length(file_list ))  {
+for(i in 200:length(file_list ))  {
  # print(file_list[i])
   
-  filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all/"
+  filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw/"
   file_next <- paste(filestub, file_list[i[]], sep="")
  print(file_next)
 print(i)
 
-#filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/adj.all/data_40.34375_-123.15625"
+#filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw/data_40.34375_-123.15625"
 filestub <- file_next
 
 teststr <-as.vector(strsplit(filestub, "_"))
@@ -95,6 +95,9 @@ for(yr in startYr:endYr) {
   filename = paste(file_dir, "/_",lat,"_",long, ".csv", sep="")
   print(filename)
   subpart <- all.xts[as.character(yr)]
+  
+  # modidfy this to not write out the header....
+  # also, think about just writing one file per year...maybe this is too much trouble
   write.csv(file=filename, subpart)  
  
 
