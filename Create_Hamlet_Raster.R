@@ -2,15 +2,17 @@
 rm(list = ls())
   
 
-top_level <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
+top_level <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/"
 
 dirs <- list.files(top_level, pattern="[1-9]{4}")
+#dirs <- list.files(top_level)
 
 for (i in 1:length(dirs)) {
 
+  i=3
   new_dir <-
     paste("/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/",
-          dirs[i],
+          dirs[i],"/textfiles", dirs[i],
           sep = "")
   
   print(new_dir)
@@ -19,10 +21,16 @@ for (i in 1:length(dirs)) {
   
   all_files <- list.files()
   
+  
+  # $awk 'FNR > 1 { print }' *.csv USE THIS to concatenate, not the lines below
+  
   mymergeddata <-
     do.call(rbind,
             lapply(all_files, read.csv))
   
+  mymergeddata <-
+    do.call(rbind,
+            lapply(dirs, read.csv))
   
   # might make more sense just to cat these files together, then read in all at once.
   
