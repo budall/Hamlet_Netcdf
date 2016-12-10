@@ -28,7 +28,7 @@ start <- Sys.time()
 
 
 
-for (i in 200:length(file_list))  {
+for (i in 1:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
   
@@ -111,7 +111,7 @@ for (i in 200:length(file_list))  {
   var_types <- c("precip", "wind", "tmin", "tmax")
   
   startYr <- 1915
-  endYr <- 1915
+  endYr <- 2015
   for (yr in startYr:endYr) {
     for (var_kind in 1:length(var_types)) {
       stub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
