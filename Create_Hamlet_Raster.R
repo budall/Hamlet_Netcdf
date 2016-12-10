@@ -19,39 +19,42 @@ startYr <- 1915
 endYr <- 1916
 
 for (yr in startYr:endYr) {
+#  yr <- 1915
   for (var_kind in 1:length(var_types)) {
-    stub <-
-      "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
-    # break this into a subdir based on the variable? to keep files manageable?
+  #  var_kind <-1
+    stub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
     file_dir <- paste(stub, "/", yr,  "/", sep = "")
     input_filename  = paste(file_dir, yr, "_", var_types[var_kind], ".csv", sep = "")
     output_filename = paste(file_dir, yr, "_", var_types[var_kind], ".nc",  sep = "")
-    data_file <- read.csv(file = input_filename, header = False)
-    colnames(data_file) <- c("month", "dates", "lat", "long", "var")
+    data_to_raster <- read.csv(file = input_filename, header = FALSE)
+    colnames(data_to_raster) <- c("month", "dates", "lat", "long", "var")
     master_stack <- raster()
+    
     for (month in 1:12) {
-      data_to_raster[data_to_raster$month == month,]
-      new_layer <- rasterFromXYZ(data_to_raster)
+   #   month <- 1
+      layer_data <- data_to_raster[data_to_raster$month == month,3:5]
+      new_layer <- rasterFromXYZ(layer_data)
       master_stack <- stack(new_layer, band = month)
     }
+    
     writeRaster(file=output_filename, master_stack)
  }
   
 }  
   
-
+test_raster <- raster(output_filename)
   
-  plot(test)
+  plot(test_raster)
   
   
   
   # https://gis.stackexchange.com/questions/20018/how-can-i-convert-data-in-the-form-of-lat-lon-value-into-a-raster-file-using-r
   
-  library(sp)
-  library(rgdal)
-  coordinates(pts) =  ~ x + y
-  proj4string(pts) = CRS("+init=epsg:4326") # set it to lat-long
-  pts = spTransform(pts, CRS("insert your proj4 string here"))
+ # library(sp)
+#  library(rgdal)
+#  coordinates(pts) =  ~ x + y
+#  proj4string(pts) = CRS("+init=epsg:4326") # set it to lat-long
+#  pts = spTransform(pts, CRS("insert your proj4 string here"))
   
   # d. Tell R that this is gridded:
   #
@@ -65,4 +68,3 @@ for (yr in startYr:endYr) {
   # Now write it as a geoTIFF file using the raster package:
   #   writeRaster(r,"pts.tif")
   
-}
