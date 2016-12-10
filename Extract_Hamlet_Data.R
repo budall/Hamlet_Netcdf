@@ -28,7 +28,7 @@ start <- Sys.time()
 
 
 
-for (i in 1:length(file_list))  {
+for (i in 1220:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
   
