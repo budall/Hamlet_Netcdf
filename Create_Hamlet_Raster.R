@@ -32,12 +32,12 @@ for (yr in startYr:endYr) {
     
     for (month in 1:12) {
    #   month <- 1
-      layer_data <- data_to_raster[data_to_raster$month == month,3:5]
+      layer_data <- data_to_raster[data_to_raster$month == month,c(4,3,5)]
       new_layer <- rasterFromXYZ(layer_data)
       master_stack <- stack(new_layer, band = month)
     }
     
-    writeRaster(file=output_filename, master_stack)
+    writeRaster(file=output_filename, master_stack, overwrite=TRUE)
  }
   
 }  
