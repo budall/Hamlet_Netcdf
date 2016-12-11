@@ -33,7 +33,7 @@ for (yr in startYr:endYr) {
     colnames(data_to_raster) <-
       c("month", "dates", "lat", "lon", "var") # also try  "x" for lat, "y" for lon if necessary
     master_stack <- raster()
-    
+    projection(master_stack)<- CRS("+proj=longlat +datum=WGS84")
     for (month in 1:12) {
       #   month <- 1
       layer_data <-
