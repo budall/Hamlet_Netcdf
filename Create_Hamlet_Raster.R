@@ -14,15 +14,16 @@ top_level <-
   "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/"
 
 var_types <- c("precip", "wind", "tmin", "tmax")
-var_unit <- c("mm/month", "m/s", "Deg C", "Deg C")
+var_units <- c("mm/month", "m/s", "Deg C", "Deg C")
 
 startYr <- 1915
 endYr <- 1916
 
 for (yr in startYr:endYr) {
   #  yr <- 1915
+  print(yr)
   for (var_kind in 1:length(var_types)) {
-    #  var_kind <-1
+   #  var_kind <-1
     stub <-
       "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
     file_dir <- paste(stub, "/", yr,  "/", sep = "")
@@ -32,14 +33,16 @@ for (yr in startYr:endYr) {
       read.csv(file = input_filename, header = FALSE)
     colnames(data_to_raster) <-
       c("month", "dates", "lat", "lon", "var") # also try  "x" for lat, "y" for lon if necessary
-    master_stack <- raster()
-    projection(master_stack)<- CRS("+proj=longlat +datum=WGS84")
+    master_stack <- stack()
+   # projection(master_stack)<- CRS("+proj=longlat +datum=WGS84")
+    crs(master_stack) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
     for (month in 1:12) {
       #   month <- 1
       layer_data <-
         data_to_raster[data_to_raster$month == month, c(4, 3, 5)]
       new_layer <- rasterFromXYZ(layer_data)
-      master_stack <- stack(new_layer, band = month)
+      crs(new_layer) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
+      master_stack <- stack(master_stack, new_layer)
     }
     
     writeRaster(
@@ -47,14 +50,16 @@ for (yr in startYr:endYr) {
       master_stack,
       overwrite = TRUE,
       varname = var_types[var_kind],
-      varunit = "tests",
+      varunit = var_units[var_kind],
       xname = "latitude",
       yname = "longitude",
-      zunit = "no zunits",
-      zname = "no zname",
+  #    zunit = var_units[var_kind],
+  #    zname = var_unit[var_kind],
       format = "CDF"
     )
+    print(output_filename)
   }
+ 
   
 }
 
