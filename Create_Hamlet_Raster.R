@@ -51,10 +51,10 @@ for (yr in startYr:endYr) {
       overwrite = TRUE,
       varname = var_types[var_kind],
       varunit = var_units[var_kind],
-      xname = "latitude",
-      yname = "longitude",
-  #    zunit = var_units[var_kind],
-  #    zname = var_unit[var_kind],
+      xname = "longitude",
+      yname = "latitude",
+      zunit = "1",
+      zname = "month",
       format = "CDF"
     )
     print(output_filename)
