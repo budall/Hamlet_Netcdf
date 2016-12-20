@@ -28,10 +28,10 @@ start <- Sys.time()
 
 
 
-for (i in 1220:length(file_list))  {
+for (i in 1:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
-  
+ # i=1
   filestub <-
     "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw/"
   file_next <- paste(filestub, file_list[i[]], sep = "")
@@ -43,16 +43,21 @@ for (i in 1220:length(file_list))  {
   
   teststr <- as.vector(strsplit(filestub, "_"))
   
-  lat <- teststr[[1]][5]
-  long <- teststr[[1]][6]
+  lat <- as.numeric(teststr[[1]][5])
+  long <- as.numeric(teststr[[1]][6])
+  print(lat)
+  print(long)
   
-  # if ((lat >32) || (lat <40)) {
-  #   break
-  # }
-  # if ((long < -111) || (long > -107)) {
-  #   break
-  # }
-  
+   if ( ( (lat >= 30) & (lat <= 44)) & ( (long <= -104)  & (long >= -116) ) ) {
+     print("in bounds")
+#     next() for testing
+}
+   else {
+    print("skipping")
+       next()
+ }
+
+    
   netcdf_filename <- filestub
   
   xyz_file <- read.table(netcdf_filename)
@@ -117,7 +122,7 @@ for (i in 1220:length(file_list))  {
       stub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
       # break this into a subdir based on the variable? to keep files manageable?
       file_dir <- paste(stub, "/", yr,  "/", yr, sep = "")
-      filename = paste(file_dir, "_", var_types[var_kind], ".csv", sep = "")
+      filename = paste(file_dir, "_A_", var_types[var_kind], ".csv", sep = "")
       
       print(filename)
       
