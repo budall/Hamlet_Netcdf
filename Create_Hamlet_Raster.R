@@ -30,7 +30,7 @@ for (yr in startYr:endYr) {
     input_filename  = paste(file_dir, yr, "_", var_types[var_kind], ".csv", sep = "")
     output_filename = paste(file_dir, yr, "_", var_types[var_kind], ".nc",  sep = "")
     data_to_raster <-
-      read.csv(file = input_filename, header = FALSE)
+      unique(read.csv(file = input_filename, header = FALSE))
     colnames(data_to_raster) <-
       c("month", "dates", "lat", "lon", "var") # also try  "x" for lat, "y" for lon if necessary
     master_stack <- stack()
