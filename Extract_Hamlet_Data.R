@@ -28,7 +28,7 @@ start <- Sys.time()
 
 
 
-for (i in 1:length(file_list))  {
+for (i in 17369:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
  # i=1
@@ -48,14 +48,14 @@ for (i in 1:length(file_list))  {
   print(lat)
   print(long)
   
-   if ( ( (lat >= 30) & (lat <= 44)) & ( (long <= -104)  & (long >= -116) ) ) {
-     print("in bounds")
-#     next() for testing
-}
-   else {
-    print("skipping")
-       next()
- }
+#    if ( ( (lat >= 30) & (lat <= 44)) & ( (long <= -104)  & (long >= -116) ) ) {
+#      print("in bounds")
+# #     next() for testing
+# }
+#    else {
+#     print("skipping")
+#        next()
+#  }
 
     
   netcdf_filename <- filestub
@@ -122,7 +122,8 @@ for (i in 1:length(file_list))  {
       stub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015"
       # break this into a subdir based on the variable? to keep files manageable?
       file_dir <- paste(stub, "/", yr,  "/", yr, sep = "")
-      filename = paste(file_dir, "_A_", var_types[var_kind], ".csv", sep = "")
+  #    filename = paste(file_dir, "_A_", var_types[var_kind], ".csv", sep = "")
+      filename = paste(file_dir, "_", var_types[var_kind], ".csv", sep = "")
       
       print(filename)
       
