@@ -28,14 +28,14 @@ start <- Sys.time()
 
 
 
-for (i in 17369:length(file_list))  {
+for (i in 31249:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
  # i=1
   filestub <-
     "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw/"
   file_next <- paste(filestub, file_list[i[]], sep = "")
-  print(file_next)
+#  print(file_next)
   print(i)
   
   #filestub <- "/Users/bradleyudall/Desktop/Gridded_Data/Hamlet/UCLA_1915_2015/raw/data_40.34375_-123.15625"
@@ -151,4 +151,7 @@ for (i in 17369:length(file_list))  {
 
 print("DONE")
 print(start)
-Sys.time()
+end <- Sys.time()
+print(end)
+print(end-start)
+
