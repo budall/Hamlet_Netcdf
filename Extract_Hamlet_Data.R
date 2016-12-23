@@ -28,7 +28,7 @@ start <- Sys.time()
 
 
 
-for (i in 31249:length(file_list))  {
+for (i in 51372:length(file_list))  {
 #  for (i in 1:10)  {
   # print(file_list[i])
  # i=1
@@ -125,7 +125,7 @@ for (i in 31249:length(file_list))  {
   #    filename = paste(file_dir, "_A_", var_types[var_kind], ".csv", sep = "")
       filename = paste(file_dir, "_", var_types[var_kind], ".csv", sep = "")
       
-      print(filename)
+ #     print(filename)
       
       # need to subset date, lat, long, variable
     #  subpart <- all.xts[as.character(yr), XXX == var_kind]
